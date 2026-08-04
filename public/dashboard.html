@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bolo English member dashboard for live, level-matched English speaking practice.">
+  <title>Dashboard | Bolo English</title>
+  <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
+  <link rel="stylesheet" href="/css/styles.css?v=bolo-v20-pricing">
+</head>
+<body class="app-shell bolo-dashboard-shell">
+  <header class="app-header bolo-dashboard-header">
+    <div class="container navbar">
+      <a class="brand" href="/dashboard" aria-label="Bolo English dashboard">
+        <img class="brand-logo" src="/assets/bolo-icon.png" alt="Bolo English logo">
+        <span class="brand-text">Bolo English<small>Speak • Practice • Grow</small></span>
+      </a>
+
+      <div class="nav-actions dashboard-header-actions">
+        <a class="btn btn-outline btn-small" href="/">Home</a>
+        <div class="user-chip" data-user-chip></div>
+        <button class="btn btn-outline btn-small" data-logout>Sign out</button>
+      </div>
+
+      <details class="mobile-nav-menu">
+        <summary aria-label="Open navigation menu">☰</summary>
+        <div class="mobile-nav-popover">
+          <a href="/">Home</a>
+          <a href="#live-actions">Practice</a>
+          <button type="button" data-logout>Sign out</button>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <main class="app-main bolo-dashboard-main">
+    <div class="container">
+      <section class="dashboard-welcome-grid" aria-labelledby="dashboard-main-heading">
+        <div class="dashboard-welcome-copy">
+          <div class="dashboard-welcome-line">
+            <span class="dashboard-welcome-avatar" aria-hidden="true">👋</span>
+            <div>
+              <span>Welcome back</span>
+              <strong id="dashboard-greeting">Bolo English learner</strong>
+            </div>
+          </div>
+          <h1 id="dashboard-main-heading">Build your English fluency through real conversations.</h1>
+          <p>Practise speaking, meet learners at your level, and grow your confidence one conversation at a time.</p>
+          <div class="dashboard-benefits" aria-label="Platform benefits">
+            <div><span>💬</span><strong>Real conversations</strong><small>Speak in live rooms</small></div>
+            <div><span>🎯</span><strong>Level matched</strong><small>Beginner to advanced</small></div>
+            <div><span>🛡️</span><strong>Moderated</strong><small>Safe community access</small></div>
+          </div>
+        </div>
+
+        <aside class="join-next-card" aria-labelledby="join-next-heading">
+          <div class="join-next-glow" aria-hidden="true"></div>
+          <h2 id="join-next-heading">Join next conversation</h2>
+          <div class="join-next-stats">
+            <div class="join-next-stat">
+              <span class="join-next-icon" aria-hidden="true">👥</span>
+              <small>Active now</small>
+              <strong id="join-active-rooms">Checking rooms…</strong>
+              <em id="join-active-users">Live learners</em>
+            </div>
+            <div class="join-next-stat">
+              <span class="join-next-icon" aria-hidden="true">🎯</span>
+              <small>Your level</small>
+              <strong id="join-user-level">Loading…</strong>
+              <em>Matched practice</em>
+            </div>
+          </div>
+          <button id="join-next-button" class="join-next-button" type="button" disabled>
+            <span>Finding a room…</span><span aria-hidden="true">→</span>
+          </button>
+          <p id="join-next-note" class="join-next-note">We will match you with a live room at your English level.</p>
+        </aside>
+      </section>
+
+      <div id="dashboard-alert" class="alert" role="alert"></div>
+
+
+      <section id="pricing-section" class="dashboard-pricing-section" aria-labelledby="pricing-heading">
+        <div class="dashboard-pricing-head">
+          <div>
+            <span id="pricing-badge" class="pricing-eyebrow">Membership plans</span>
+            <h2 id="pricing-heading">Keep practising after your free trial</h2>
+            <p id="pricing-copy">Choose a plan and continue on WhatsApp. The administrator will activate your validity after payment confirmation.</p>
+          </div>
+          <span class="pricing-contact-pill">WhatsApp: +91 88083 94539</span>
+        </div>
+        <div class="dashboard-pricing-grid">
+          <article class="dashboard-plan-card">
+            <span class="plan-duration">1 month</span>
+            <strong class="plan-price">₹500</strong>
+            <p>Unlimited access to active speaking rooms for one month.</p>
+            <a class="btn btn-primary plan-whatsapp-link" data-plan="1 Month" data-price="₹500" href="#" target="_blank" rel="noopener">Choose 1 month</a>
+          </article>
+          <article class="dashboard-plan-card featured">
+            <span class="plan-popular">Popular</span>
+            <span class="plan-duration">3 months</span>
+            <strong class="plan-price">₹999</strong>
+            <p>Continue practising in any room and create your own rooms.</p>
+            <a class="btn btn-primary plan-whatsapp-link" data-plan="3 Months" data-price="₹999" href="#" target="_blank" rel="noopener">Choose 3 months</a>
+          </article>
+          <article class="dashboard-plan-card teacher-plan">
+            <span class="plan-duration">1-to-1 with teachers</span>
+            <strong class="plan-price">₹6,000</strong>
+            <p>Ask about a personalised one-to-one English learning session.</p>
+            <a class="btn btn-secondary plan-whatsapp-link" data-plan="1-to-1 with Teachers" data-price="₹6,000" href="#" target="_blank" rel="noopener">Message for 1-to-1</a>
+          </article>
+        </div>
+        <p class="pricing-helper">WhatsApp will open with your selected plan and username already added to the message.</p>
+      </section>
+
+      <section class="member-summary-grid dashboard-summary-grid" aria-label="Your membership and profile">
+        <article class="card membership-card dashboard-mini-card">
+          <span class="dashboard-card-icon" aria-hidden="true">📅</span>
+          <div><span class="helper">Membership validity</span><strong id="membership-plan">Loading…</strong><p id="membership-expiry">Checking validity…</p></div>
+        </article>
+        <article class="card profile-card dashboard-mini-card">
+          <span class="dashboard-card-icon" aria-hidden="true">📈</span>
+          <div class="dashboard-profile-content">
+            <div><span class="helper">Your speaking profile</span><h3 id="member-level">Loading profile…</h3></div>
+            <form id="profile-form" class="inline-form profile-form">
+              <select id="profile-level" class="input input-small" aria-label="English speaking level" required>
+                <option value="1">Level 1 · Beginner</option>
+                <option value="2">Level 2 · Intermediate</option>
+                <option value="3">Level 3 · Advanced</option>
+              </select>
+              <select id="profile-gender" class="input input-small" aria-label="Gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              <button class="btn btn-secondary btn-small" type="submit">Save</button>
+            </form>
+          </div>
+        </article>
+      </section>
+
+      <section id="live-actions" class="dashboard-grid dashboard-action-grid">
+        <section class="card action-card action-card-accent">
+          <div class="feature-icon">＋</div>
+          <h3 id="room-create-heading">Create a voice room</h3>
+          <p id="room-create-note">Choose a respectful topic and participant limit. Active trial and paid members can create instantly.</p>
+          <form id="create-room-form" class="form-grid">
+            <div class="form-group">
+              <label for="room-title">Group topic</label>
+              <input class="input" id="room-title" maxlength="60" placeholder="Example: Daily conversation practice" value="English Speaking Practice" required>
+            </div>
+            <div class="form-group">
+              <label for="room-capacity-input">Participant limit</label>
+              <select class="input" id="room-capacity-input">
+                <option value="2">2 participants</option><option value="3">3 participants</option><option value="4">4 participants</option><option value="5">5 participants</option><option value="6" selected>6 participants</option><option value="7">7 participants</option><option value="8">8 participants</option>
+              </select>
+            </div>
+            <button id="room-create-button" class="btn btn-primary" type="submit">Create room now</button>
+          </form>
+        </section>
+
+        <section id="join-room-card" class="card action-card">
+          <div class="feature-icon">→</div>
+          <h3 id="join-room-heading">Join any active room</h3>
+          <p id="join-room-note">Paste an invite link or room code. Safety rules appear before your microphone starts.</p>
+          <form id="join-room-form" class="form-grid">
+            <div class="form-group">
+              <label for="join-code">Room code or invite link</label>
+              <input class="input" id="join-code" required placeholder="Example: A1B2C3D4">
+            </div>
+            <button class="btn btn-secondary" type="submit">Continue to room</button>
+          </form>
+        </section>
+      </section>
+
+      <section class="card recent-card dashboard-recent-card">
+        <div class="page-head compact-head">
+          <div><h3 id="room-list-title">Your rooms</h3><p id="room-list-note">Your active rooms and invite links appear here.</p></div>
+          <button id="refresh-rooms" class="btn btn-outline btn-small">Refresh</button>
+        </div>
+        <div id="recent-rooms" class="room-list"></div>
+      </section>
+    </div>
+  </main>
+  <script src="/js/common.js"></script>
+  <script src="/js/dashboard.js?v=bolo-v20-pricing"></script>
+</body>
+</html>

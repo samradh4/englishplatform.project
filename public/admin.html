@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | Bolo English</title>
+  <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
+  <link rel="stylesheet" href="/css/styles.css?v=bolo-v20-admin">
+</head>
+<body class="app-shell">
+  <header class="app-header">
+    <div class="container navbar">
+      <a class="brand" href="/admin"><img class="brand-logo" src="/assets/bolo-icon.png" alt="Bolo English logo"><span class="brand-text">Bolo English<small>Administrator control</small></span></a>
+      <div class="nav-actions"><div class="user-chip" data-user-chip></div><button class="btn btn-outline btn-small" data-logout>Sign out</button></div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div class="container admin-layout">
+      <div class="page-head">
+        <div><div class="eyebrow">Administrator</div><h2>Members, trials, validity, rooms, and moderation.</h2><p>New members receive instant access with a 1-day trial. Review their details, activate paid validity after payment, and moderate rooms and live sessions.</p></div>
+        <button id="refresh-all" class="btn btn-outline btn-small">Refresh all</button>
+      </div>
+      <div id="admin-alert" class="alert" role="alert"></div>
+
+      <section class="stats-grid admin-stats">
+        <article class="card stat-card"><span class="helper">Legacy pending</span><strong id="stat-pending">0</strong></article>
+        <article class="card stat-card"><span class="helper">Active members</span><strong id="stat-active">0</strong></article>
+        <article class="card stat-card"><span class="helper">Expired members</span><strong id="stat-expired">0</strong></article>
+        <article class="card stat-card"><span class="helper">Legacy pending rooms</span><strong id="stat-rooms">0</strong></article>
+        <article class="card stat-card"><span class="helper">Open reports</span><strong id="stat-reports">0</strong></article>
+        <article class="card stat-card"><span class="helper">Private links</span><strong id="stat-private">0</strong></article>
+      </section>
+
+
+      <section class="card admin-card private-session-admin-card">
+        <div class="page-head compact-head">
+          <div><div class="eyebrow">Admin-only guest access</div><h3>Private guest session links</h3><p>These secret links never appear publicly. Guests enter only their name and phone number and join with audio. Only the signed-in administrator can enable a camera.</p></div>
+        </div>
+        <form id="private-session-form" class="private-session-create-form">
+          <label>Session title<input id="private-title" class="input input-small" maxlength="60" placeholder="Example: Trial counselling session" required></label>
+          <label>Participant limit<select id="private-capacity" class="input input-small"><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="8">8</option><option value="10">10</option></select></label>
+          <label>Link validity<select id="private-expiry" class="input input-small"><option value="1">1 hour</option><option value="6">6 hours</option><option value="24" selected>24 hours</option><option value="72">3 days</option><option value="168">7 days</option></select></label>
+          <button class="btn btn-primary" type="submit">Create private link</button>
+        </form>
+        <div class="private-security-note"><strong>Private by design:</strong> the URL contains a long signed token, is not shown in live rooms, and can be revoked at any time. Phone numbers are visible only in this admin panel. Guests are audio-only; open the link while signed in as admin to use the camera. Guest names and tags can be updated live.</div>
+        <div id="private-sessions-list" class="admin-list"></div>
+      </section>
+
+      <section class="card admin-card">
+        <div class="page-head compact-head">
+          <div><h3>Member details and paid validity</h3><p>New accounts start automatically with a 1-day trial. Full name, phone number, email, username, level, and membership status are shown here. After payment, activate 1 month, 3 months, or the 1-to-1 teacher plan.</p></div>
+          <div class="filter-row" id="user-filters">
+            <button class="btn btn-primary btn-small" data-user-filter="all">All members</button>
+            <button class="btn btn-outline btn-small" data-user-filter="approved">Active accounts</button>
+            <button class="btn btn-outline btn-small" data-user-filter="pending">Legacy pending</button>
+          </div>
+        </div>
+        <div id="users-list" class="admin-list"></div>
+      </section>
+
+      <section class="card admin-card">
+        <div class="page-head compact-head">
+          <div><h3>Room controls</h3><p>Active trial and paid members create rooms instantly. You can edit, lock, close, clear bans, or delete any room.</p></div>
+          <div class="filter-row" id="room-filters">
+            <button class="btn btn-primary btn-small" data-room-filter="pending">Pending</button>
+            <button class="btn btn-outline btn-small" data-room-filter="approved">Approved</button>
+            <button class="btn btn-outline btn-small" data-room-filter="all">All</button>
+          </div>
+        </div>
+        <div id="rooms-list" class="admin-list"></div>
+      </section>
+      <section class="card admin-card">
+        <div class="page-head compact-head">
+          <div><h3>Safety reports</h3><p>Complaints are private. Review the report, investigate the room, and mark it reviewed or dismissed.</p></div>
+          <div class="filter-row" id="report-filters">
+            <button class="btn btn-primary btn-small" data-report-filter="open">Open</button>
+            <button class="btn btn-outline btn-small" data-report-filter="reviewed">Reviewed</button>
+            <button class="btn btn-outline btn-small" data-report-filter="all">All</button>
+          </div>
+        </div>
+        <div id="reports-list" class="admin-list"></div>
+      </section>
+    </div>
+  </main>
+  <datalist id="special-tag-options">
+    <option value="Teacher"></option>
+    <option value="Senior Teacher"></option>
+    <option value="Mentor"></option>
+    <option value="Guest Speaker"></option>
+    <option value="Counsellor"></option>
+    <option value="Trainer"></option>
+    <option value="Moderator"></option>
+    <option value="VIP Guest"></option>
+  </datalist>
+  <script src="/js/common.js"></script>
+  <script src="/js/admin.js?v=bolo-v20-admin"></script>
+</body>
+</html>
