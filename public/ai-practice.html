@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Practise spoken English one-to-one with the free Bolo AI voice partner.">
+  <title>Bolo AI Voice Partner | Bolo English</title>
+  <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
+  <link rel="stylesheet" href="/css/styles.css?v=bolo-v21-5-long-pause">
+</head>
+<body class="app-shell ai-practice-shell">
+  <header class="app-header ai-practice-header">
+    <div class="container navbar">
+      <a class="brand" href="/dashboard" aria-label="Bolo English dashboard">
+        <img class="brand-logo" src="/assets/bolo-icon.png" alt="Bolo English logo">
+        <span class="brand-text">Bolo English<small>Speak • Practice • Grow</small></span>
+      </a>
+      <div class="nav-actions ai-header-actions">
+        <a class="btn btn-outline btn-small" href="/dashboard">← Dashboard</a>
+        <div class="user-chip" data-user-chip></div>
+        <button class="btn btn-outline btn-small" data-logout>Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main ai-practice-main">
+    <div class="container ai-practice-container">
+      <section class="ai-hero-card">
+        <div class="ai-hero-copy">
+          <span class="ai-kicker"><span class="ai-live-dot"></span> Free practice partner</span>
+          <h1>Speak with <span>Bolo AI</span></h1>
+          <p>Practise English one-to-one whenever you want. Talk naturally, ask questions, get context-aware spoken replies, and build confidence without waiting for a room.</p>
+          <div class="ai-hero-badges">
+            <span>🎙️ Voice conversation</span>
+            <span>🔊 Spoken replies</span>
+            <span>✨ Gentle corrections</span>
+            <span>🆓 No paid AI API required</span>
+          </div>
+        </div>
+        <div class="ai-orb-wrap" aria-hidden="true">
+          <div id="ai-orb" class="ai-orb"><span>AI</span><i></i><i></i><i></i></div>
+          <strong id="ai-orb-status">Ready to practise</strong>
+        </div>
+      </section>
+
+      <div id="ai-alert" class="alert" role="alert"></div>
+
+      <section class="ai-practice-layout">
+        <aside class="card ai-settings-card">
+          <div class="ai-section-heading">
+            <div><span class="helper">Practice setup</span><h2>Choose your session</h2></div>
+          </div>
+          <div class="form-group">
+            <label for="ai-mode">Conversation type</label>
+            <select id="ai-mode" class="input">
+              <option value="daily">Daily conversation</option>
+              <option value="interview">Interview practice</option>
+              <option value="beginner">Beginner basics</option>
+              <option value="travel">Travel English</option>
+              <option value="college">College & studies</option>
+              <option value="random">Random speaking topics</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ai-voice">Bot voice</label>
+            <div class="ai-voice-picker-row">
+              <select id="ai-voice" class="input"><option value="">Default voice</option></select>
+              <button id="ai-test-voice" class="btn btn-outline btn-small" type="button">Test voice</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ai-speed">Speaking speed <span id="ai-speed-value">1.0×</span></label>
+            <input id="ai-speed" class="ai-range" type="range" min="0.75" max="1.25" value="1" step="0.05">
+          </div>
+          <label class="ai-toggle-row">
+            <input id="ai-corrections" type="checkbox" checked>
+            <span><strong>Gentle corrections</strong><small>Show simple grammar improvements after your turn.</small></span>
+          </label>
+          <button id="ai-new-session" class="btn btn-outline ai-full-button" type="button">↻ New conversation</button>
+          <div class="ai-privacy-note">
+            <strong>Privacy note</strong>
+            <p>This free version uses your browser's speech recognition and speech synthesis. Speech recognition availability and processing can vary by browser/device.</p>
+          </div>
+        </aside>
+
+        <section class="card ai-conversation-card">
+          <div class="ai-conversation-head">
+            <div>
+              <span class="helper">One-to-one practice</span>
+              <h2 id="ai-session-title">Daily conversation</h2>
+            </div>
+            <div class="ai-session-stats">
+              <span><strong id="ai-turn-count">0</strong> turns</span>
+              <span id="ai-level-badge">Your level</span>
+            </div>
+          </div>
+
+          <div id="ai-transcript" class="ai-transcript" aria-live="polite" aria-label="Conversation transcript"></div>
+
+          <div id="ai-correction-card" class="ai-correction-card" hidden>
+            <span>✨ Quick improvement</span>
+            <p id="ai-correction-text"></p>
+          </div>
+
+          <div class="ai-composer">
+            <button id="ai-start-voice" class="ai-start-voice-button" type="button">▶ Start voice session</button>
+            <p id="ai-voice-help" class="ai-voice-help">Tap once to enable spoken replies. Browsers often block automatic speech until you interact with the page.</p>
+            <div class="ai-mic-row">
+              <button id="ai-mic-button" class="ai-mic-button" type="button" aria-label="Start speaking">
+                <span class="ai-mic-icon">🎙️</span>
+                <span id="ai-mic-label">Tap to speak</span>
+              </button>
+              <button id="ai-speaker-button" class="btn btn-outline btn-small" type="button" aria-pressed="true">🔊 Speaker on</button>
+            </div>
+            <div class="ai-text-row">
+              <input id="ai-text-input" class="input" type="text" maxlength="500" autocomplete="off" placeholder="Or type your reply here…">
+              <button id="ai-send-button" class="btn btn-primary" type="button">Send</button>
+            </div>
+            <p id="ai-support-note" class="ai-support-note">Speak naturally — short pauses are okay. The mic waits about 4 seconds before sending your turn. Chrome or Edge works best.</p>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/ai-practice.js?v=bolo-v21-5-long-pause"></script>
+</body>
+</html>

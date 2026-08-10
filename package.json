@@ -1,0 +1,15 @@
+{
+  "name": "bolo-english",
+  "version": "21.5.0-long-pause-recognition",
+  "private": true,
+  "description": "Bolo English with contextual AI voice practice, browser speech, optional real LLM backend, trial/pricing, SQLite persistence, voice rooms, and admin controls.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check public/js/common.js && node --check public/js/auth.js && node --check public/js/admin.js && node --check public/js/dashboard.js && node --check public/js/room.js && node --check public/js/public-rooms.js && node --check public/js/pending.js && node --check public/js/private-session.js && node --check public/js/ai-practice.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

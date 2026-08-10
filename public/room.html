@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Voice room | Bolo English</title>
+  <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
+  <link rel="stylesheet" href="/css/styles.css?v=bolo-v19-auth">
+</head>
+<body class="room-body">
+<main class="room-layout">
+  <header class="room-topbar">
+    <div class="room-meta">
+      <img class="brand-logo" src="/assets/bolo-icon.png" alt="Bolo English logo">
+      <div>
+        <h1 id="room-title">Loading room…</h1>
+        <p><span id="room-level"></span> · <span id="room-code"></span> · Owner: <span id="room-owner">—</span> · <span id="participant-count">Not joined</span></p>
+      </div>
+    </div>
+    <div class="room-actions"><button id="copy-invite" class="btn btn-outline btn-small">Copy invite</button></div>
+  </header>
+
+  <nav id="mobile-room-tabs" class="mobile-room-tabs" aria-label="Room view">
+    <button class="mobile-room-tab active" type="button" data-mobile-view="people" aria-selected="true" aria-controls="voice-stage"><span aria-hidden="true">👥</span> People</button>
+    <button class="mobile-room-tab" type="button" data-mobile-view="chat" aria-selected="false" aria-controls="chat-panel"><span aria-hidden="true">💬</span> Chat <span id="chat-unread" class="tab-badge" hidden>New</span></button>
+  </nav>
+
+  <div class="room-content">
+    <section id="voice-stage" class="voice-stage">
+      <div class="voice-stage-head">
+        <div><span class="live-dot"></span><strong>Live voice room</strong><span id="voice-tech" class="voice-tech">Preparing secure voice…</span></div>
+        <span id="room-capacity" class="helper-light"></span>
+      </div>
+      <div id="moderator-live-controls" class="live-admin-bar moderator-live-bar" hidden>
+        <strong id="moderator-control-title">Room controls</strong>
+        <button class="btn btn-outline btn-tiny" data-room-moderate="mute-all">Mute everyone</button>
+        <button class="btn btn-outline btn-tiny" data-room-moderate="lower-all-hands">Lower all hands</button>
+        <button class="btn btn-outline btn-tiny admin-only-room-control" data-room-moderate="lock">Lock room</button>
+        <button class="btn btn-outline btn-tiny admin-only-room-control" data-room-moderate="unlock">Unlock room</button>
+        <button class="btn btn-danger btn-tiny admin-only-room-control" data-room-moderate="close">Close room</button>
+      </div>
+      <div id="voice-network-banner" class="voice-network-banner" aria-live="polite">
+        <span class="network-dot"></span><strong>Voice network:</strong><span id="voice-network-label">Checking…</span>
+      </div>
+
+      <section id="speaking-topic-card" class="speaking-topic-card" aria-live="polite">
+        <div class="topic-icon" aria-hidden="true">💡</div>
+        <div class="topic-copy">
+          <div class="topic-heading-row">
+            <span class="topic-kicker">Current speaking topic</span>
+            <span id="topic-timer" class="topic-timer">10:00 left</span>
+          </div>
+          <h2 id="current-topic">Loading a topic for this room…</h2>
+          <p id="topic-helper">Everyone in this room receives the same topic. It changes automatically every 10 minutes.</p>
+          <div class="topic-progress" aria-hidden="true"><span id="topic-progress-bar"></span></div>
+        </div>
+      </section>
+
+      <div id="participant-grid" class="participant-grid" aria-live="polite">
+        <article id="local-card" class="participant-card local" data-user-id="local">
+          <div class="participant-avatar-wrap">
+            <div class="speaking-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+            <span id="local-avatar" class="participant-avatar avatar-art" aria-hidden="true"></span>
+            <span id="local-mic-badge" class="mic-badge muted" title="Microphone status">🔇</span>
+            <span id="local-profile-badge" class="profile-badge" aria-hidden="true">🎓</span><span id="local-hand-badge" class="hand-badge" hidden title="Hand raised">✋</span>
+          </div>
+          <strong id="local-label">You</strong>
+          <span id="local-role" class="participant-role"></span>
+          <span class="mic-state" id="local-mic-state">Muted until you join</span>
+          <small id="local-connection">Waiting to join</small>
+        </article>
+      </div>
+    </section>
+
+    <aside id="chat-panel" class="chat-panel">
+      <div class="chat-head">
+        <div><strong>Room chat</strong><small>Keep messages respectful.</small></div>
+        <button id="toggle-settings" class="icon-btn" title="Audio settings" aria-expanded="false">⚙</button>
+      </div>
+      <div id="mic-settings" class="mic-settings" hidden>
+        <label for="mic-select">Microphone source</label>
+        <select id="mic-select" class="input input-small"><option value="">Default microphone</option></select>
+        <label for="speaker-select">Speaker source</label>
+        <select id="speaker-select" class="input input-small"><option value="">Default speaker</option></select>
+        <p id="speaker-support-note">Speaker selection works in supported Chrome/Edge browsers. iPhone/iPad use the system audio output.</p>
+      </div>
+      <div id="chat-messages" class="chat-messages"><div class="chat-empty">Chat becomes available after you join.</div></div>
+      <form id="chat-form" class="chat-form">
+        <input id="chat-input" class="input" maxlength="300" placeholder="Write a message" autocomplete="off" disabled>
+        <button class="btn btn-primary btn-small" type="submit" disabled>Send</button>
+      </form>
+    </aside>
+  </div>
+
+  <footer class="call-controls">
+    <button id="toggle-mic" class="control-btn off" disabled><span class="control-icon">🔇</span><span class="control-label">Muted</span></button>
+    <button id="toggle-speaker" class="control-btn"><span class="control-icon">🔊</span><span class="control-label">Speaker on</span></button>
+    <button id="toggle-hand" class="control-btn hand-control" disabled><span class="control-icon">✋</span><span class="control-label">Raise hand</span></button>
+    <button id="share-invite" class="control-btn"><span class="control-icon">🔗</span><span class="control-label">Invite</span></button>
+    <button id="leave-call" class="control-btn leave"><span class="control-icon">☎</span><span class="control-label">Leave</span></button>
+  </footer>
+</main>
+
+<div id="join-modal" class="modal-backdrop show" role="dialog" aria-modal="true">
+  <section class="modal join-modal">
+    <div class="modal-mark">🎙</div><div class="eyebrow">Before joining</div>
+    <h2>Keep this room safe and respectful.</h2>
+    <p class="modal-lead">Please follow these safety rules. Your microphone starts only after you agree.</p>
+    <ul class="rules-list">
+      <li><strong>Protect your privacy:</strong> never share personal, contact, social-media, financial, Aadhaar/PAN, password, OTP, or verification details.</li>
+      <li><strong>Stay on the platform:</strong> do not join private groups, click user-shared links, send money, or respond to promotions, jobs, courses, or investments.</li>
+      <li><strong>English learning only:</strong> be respectful. Abuse, hate, threats, inappropriate content, bullying, harassment, and pressure are prohibited.</li>
+      <li><strong>No recording:</strong> do not record, screenshot, or share another person’s audio or messages without permission.</li>
+      <li><strong>Stay alert:</strong> people online may not be who they claim to be. Do not impersonate a user, teacher, or moderator.</li>
+      <li><strong>Leave and report:</strong> exit immediately and report anyone who makes you uncomfortable or breaks these rules.</li>
+    </ul>
+    <p class="modal-lead"><strong>Important:</strong> Keep personal communication and payments off the platform. Information shared voluntarily may be misused.</p>
+    <label class="consent-row"><input id="rules-consent" type="checkbox"><span>I have read and agree to follow the community safety guidelines.</span></label>
+    <div id="join-alert" class="alert"></div>
+    <div class="modal-actions"><a class="btn btn-outline" href="/dashboard">Go back</a><button id="accept-join" class="btn btn-primary" type="button" disabled>Agree and join voice room</button></div>
+  </section>
+</div>
+
+<div id="report-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="report-title">
+  <section class="modal report-modal">
+    <div class="eyebrow">Private safety report</div>
+    <h2 id="report-title">Report participant</h2>
+    <p class="modal-lead">Only the administrator can see this complaint. Do not use reports for disagreements about English level or accents.</p>
+    <div class="report-target"><span id="report-avatar" class="mini-avatar"></span><strong id="report-target-name">Participant</strong></div>
+    <label class="form-group" for="report-complaint"><span>What happened?</span><textarea id="report-complaint" class="input report-textarea" minlength="10" maxlength="1000" placeholder="Describe the abusive behaviour or rule violation clearly."></textarea></label>
+    <div id="report-alert" class="alert"></div>
+    <div class="modal-actions"><button id="cancel-report" class="btn btn-outline" type="button">Cancel</button><button id="submit-report" class="btn btn-danger" type="button">Send report</button></div>
+  </section>
+</div>
+
+<div id="toast" class="toast" role="status"></div>
+<script src="/js/common.js"></script>
+<script src="/js/room.js?v=safety-camera-v17"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create a Bolo English account or sign in securely.">
+  <title>Member access | Bolo English</title>
+  <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
+  <link rel="stylesheet" href="/css/styles.css?v=bolo-v20-auth">
+</head>
+<body>
+  <main class="auth-layout auth-layout-modern">
+    <section class="auth-showcase auth-showcase-modern">
+      <a class="brand brand-light auth-brand" href="/">
+        <img class="brand-logo" src="/assets/bolo-icon.png" alt="Bolo English logo">
+        <span class="brand-text">Bolo English<small>Speak • Practice • Grow</small></span>
+      </a>
+
+      <div class="auth-copy auth-copy-modern">
+        <div class="auth-kicker"><span class="auth-kicker-dot"></span> Start speaking today</div>
+        <h1>Real conversations.<br>Real confidence.</h1>
+        <p>Create your account and receive an automatic <strong>1-day free trial</strong>. No approval wait—start practising immediately.</p>
+        <div class="auth-benefit-grid">
+          <article><span>🎙️</span><div><strong>Voice-first practice</strong><small>No camera in public rooms</small></div></article>
+          <article><span>🎯</span><div><strong>Level-matched rooms</strong><small>Beginner to advanced</small></div></article>
+          <article><span>🛡️</span><div><strong>Moderated community</strong><small>Admin tools and reporting</small></div></article>
+          <article><span>⏱️</span><div><strong>Instant trial access</strong><small>One day free, then renew</small></div></article>
+        </div>
+      </div>
+
+      <div class="auth-showcase-footer">
+        <span>Already a member? Use your username and password.</span>
+        <a class="contact-link light" href="tel:+918808394539">Help: +91 88083 94539</a>
+      </div>
+    </section>
+
+    <section class="auth-panel auth-panel-modern">
+      <div class="auth-card auth-card-modern">
+        <div class="auth-card-topline">
+          <div>
+            <div class="eyebrow" id="auth-eyebrow">Member access</div>
+            <h2 id="auth-title">Sign in</h2>
+            <p class="lead auth-subtitle" id="auth-subtitle">Enter your username and password.</p>
+          </div>
+          <span class="auth-secure-pill">🔒 Secure access</span>
+        </div>
+
+        <div class="auth-tabs auth-tabs-modern" id="member-tabs" role="tablist" aria-label="Member access options">
+          <a id="register-tab" class="auth-tab" href="/register">Create account</a>
+          <a id="login-tab" class="auth-tab" href="/login">Sign in</a>
+        </div>
+
+        <div id="auth-alert" class="alert" role="alert"></div>
+
+        <form id="login-form" class="form-grid auth-form-modern" autocomplete="on">
+          <div class="form-group">
+            <label for="login-username">Username</label>
+            <div class="input-with-icon"><span aria-hidden="true">@</span><input class="input" id="login-username" name="username" minlength="4" maxlength="24" autocomplete="username" placeholder="Enter your username" required autofocus></div>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <div class="input-with-icon"><span aria-hidden="true">🔑</span><input class="input" id="login-password" name="password" type="password" minlength="8" maxlength="72" autocomplete="current-password" placeholder="Enter your password" required></div>
+          </div>
+          <button class="btn btn-primary auth-submit" type="submit">Sign in</button>
+          <div class="auth-inline-links"><span class="helper">Login stays saved for up to 30 days.</span><a class="text-link" href="/forgot-password">Forgot password?</a></div>
+        </form>
+
+        <form id="register-form" class="form-grid auth-form-modern register-modern" autocomplete="on" hidden>
+          <section class="register-section">
+            <div class="register-section-title"><span>1</span><div><strong>Your details</strong><small>Visible only to the administrator</small></div></div>
+            <div class="form-group">
+              <label for="register-full-name">Full name</label>
+              <input class="input" id="register-full-name" name="fullName" minlength="2" maxlength="80" autocomplete="name" placeholder="Example: Rahul Sharma" required>
+            </div>
+            <div class="auth-two-column">
+              <div class="form-group">
+                <label for="register-phone">Phone number</label>
+                <input class="input" id="register-phone" name="phone" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="Example: +91 98765 43210" required>
+              </div>
+              <div class="form-group">
+                <label for="register-email">Email address</label>
+                <input class="input" id="register-email" name="email" type="email" maxlength="120" autocomplete="email" placeholder="you@example.com" required>
+              </div>
+            </div>
+          </section>
+
+          <section class="register-section">
+            <div class="register-section-title"><span>2</span><div><strong>Speaking profile</strong><small>Used to match you with suitable rooms</small></div></div>
+            <div class="auth-two-column">
+              <div class="form-group">
+                <label for="register-level">English speaking level</label>
+                <select class="input" id="register-level" name="level" required>
+                  <option value="">Choose your level</option>
+                  <option value="1">Level 1 · Beginner</option>
+                  <option value="2">Level 2 · Intermediate</option>
+                  <option value="3">Level 3 · Advanced</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="register-gender">Gender</label>
+                <select class="input" id="register-gender" name="gender" required>
+                  <option value="">Choose gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <section class="register-section">
+            <div class="register-section-title"><span>3</span><div><strong>Login details</strong><small>Use these whenever you return</small></div></div>
+            <div class="form-group">
+              <label for="register-username">Create username</label>
+              <input class="input" id="register-username" name="username" minlength="4" maxlength="24" autocomplete="username" placeholder="Example: rahul_english" required>
+              <span class="helper">4–24 letters, numbers, dots, dashes, or underscores.</span>
+            </div>
+            <div class="auth-two-column">
+              <div class="form-group">
+                <label for="register-password">Create password</label>
+                <input class="input" id="register-password" name="password" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="At least 8 characters" required>
+              </div>
+              <div class="form-group">
+                <label for="register-confirm">Confirm password</label>
+                <input class="input" id="register-confirm" name="confirmPassword" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="Repeat password" required>
+              </div>
+            </div>
+          </section>
+
+          <label class="auth-consent-row"><input id="register-consent" type="checkbox" required><span>I agree to the community rules and understand that my free trial lasts for 1 day.</span></label>
+          <div class="trial-callout"><span>🎁</span><div><strong>1-day free trial starts immediately</strong><small>After it ends, choose a paid plan and continue through WhatsApp.</small></div></div>
+          <button class="btn btn-primary auth-submit" type="submit">Create account & start free trial</button>
+        </form>
+
+        <form id="forgot-form" class="form-grid auth-form-modern" hidden>
+          <div class="form-group">
+            <label for="forgot-username">Username</label>
+            <input class="input" id="forgot-username" minlength="4" maxlength="24" autocomplete="username" placeholder="Enter your username" required>
+          </div>
+          <p class="helper">The administrator will issue a one-time reset code. Contact +91 88083 94539 after submitting.</p>
+          <button class="btn btn-primary auth-submit" type="submit">Request reset code</button>
+          <a class="text-link center-link" href="/reset-password">I already have a reset code</a>
+        </form>
+
+        <form id="reset-form" class="form-grid auth-form-modern" autocomplete="off" hidden>
+          <div class="form-group"><label for="reset-username">Username</label><input class="input" id="reset-username" minlength="4" maxlength="24" autocomplete="username" required></div>
+          <div class="form-group"><label for="reset-code">One-time reset code</label><input class="input code-input" id="reset-code" minlength="6" maxlength="12" autocomplete="one-time-code" placeholder="Enter code from administrator" required></div>
+          <div class="form-group"><label for="reset-password">New password</label><input class="input" id="reset-password" type="password" minlength="8" maxlength="72" autocomplete="new-password" required></div>
+          <div class="form-group"><label for="reset-confirm">Confirm new password</label><input class="input" id="reset-confirm" type="password" minlength="8" maxlength="72" autocomplete="new-password" required></div>
+          <button class="btn btn-primary auth-submit" type="submit">Reset password</button>
+        </form>
+
+        <div class="auth-foot auth-foot-modern">
+          <span>Administrators use the same username and password form above.</span>
+          <a href="/">Back to home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="/js/common.js"></script>
+  <script src="/js/auth.js?v=bolo-v20-auth"></script>
+</body>
+</html>

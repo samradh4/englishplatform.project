@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Private Guest Session | Bolo English</title>
+  <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
+  <link rel="stylesheet" href="/css/styles.css?v=bolo-v19-auth">
+</head>
+<body class="private-guest-body">
+  <header class="private-guest-header">
+    <a class="brand" href="/" aria-label="Bolo English home">
+      <img class="brand-logo" src="/assets/bolo-icon.png" alt="Bolo English logo">
+      <span class="brand-text">Bolo English<small>Private guest session</small></span>
+    </a>
+    <span class="private-link-badge">🔒 Unlisted admin link</span>
+  </header>
+
+  <main class="private-guest-main">
+    <section id="guest-entry-card" class="private-entry-card">
+      <div class="private-entry-icon">🎥</div>
+      <div class="eyebrow">Invitation only</div>
+      <h1 id="private-session-title">Loading private session…</h1>
+      <p class="private-entry-copy">This session is hidden from the public website. Guests join with audio after entering their name and phone number. Only the signed-in administrator can use a camera.</p>
+      <div id="private-entry-alert" class="alert" role="alert"></div>
+      <form id="private-entry-form" class="private-entry-form">
+        <div id="private-admin-join-note" class="private-security-note" hidden><strong>Administrator access:</strong> You are signed in as the administrator. You may use microphone and camera; guests remain audio-only.</div>
+        <label id="private-name-label">Your name
+          <input id="private-guest-name" class="input" name="name" autocomplete="name" maxlength="40" placeholder="Enter your name" required>
+        </label>
+        <label id="private-phone-label">Phone number
+          <input id="private-guest-phone" class="input" name="phone" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="Example: +91 98765 43210" required>
+        </label>
+        <label id="private-camera-choice" class="private-camera-choice" hidden>
+          <input id="private-camera-on" type="checkbox">
+          <span><strong>Join with camera on</strong><small>This control is available only to the signed-in administrator.</small></span>
+        </label>
+        <label class="private-consent-row">
+          <input id="private-consent" type="checkbox" required>
+          <span id="private-consent-text">I consent to microphone access and understand that my name and phone number are visible only to the administrator.</span>
+        </label>
+        <button id="private-join-button" class="btn btn-primary btn-large" type="submit">Join private session</button>
+      </form>
+      <div class="private-entry-meta">
+        <span id="private-capacity-note">Checking availability…</span>
+        <span id="private-expiry-note">Checking link validity…</span>
+      </div>
+    </section>
+
+    <section id="private-call-shell" class="private-call-shell" hidden>
+      <div class="private-call-topbar">
+        <div>
+          <div class="eyebrow">Private guest room</div>
+          <h2 id="private-call-title">Private session</h2>
+          <p id="private-call-status">Connecting securely…</p>
+        </div>
+        <button id="private-copy-link" class="btn btn-outline btn-small" type="button">Copy invite</button>
+      </div>
+      <div id="private-call-alert" class="alert" role="alert"></div>
+      <div id="private-video-grid" class="private-video-grid" aria-live="polite"></div>
+      <div class="private-call-controls" role="toolbar" aria-label="Private call controls">
+        <button id="private-mic-button" class="private-control-button" type="button"><span>🎙️</span><strong>Mute</strong></button>
+        <button id="private-camera-button" class="private-control-button" type="button" hidden disabled><span>📷</span><strong>Camera off</strong></button>
+        <button id="private-speaker-button" class="private-control-button" type="button"><span>🔊</span><strong>Speaker on</strong></button>
+        <button id="private-leave-button" class="private-control-button private-control-danger" type="button"><span>☎</span><strong>Leave</strong></button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/private-session.js?v=safety-camera-v17"></script>
+</body>
+</html>

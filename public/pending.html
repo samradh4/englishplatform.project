@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Membership validity | Bolo English</title>
+  <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
+  <link rel="stylesheet" href="/css/styles.css?v=bolo-v19-auth">
+</head>
+<body class="app-shell">
+<header class="app-header"><div class="container navbar"><a class="brand" href="/"><img class="brand-logo" src="/assets/bolo-icon.png" alt="Bolo English logo"><span class="brand-text">Bolo English<small>Membership access</small></span></a><button class="btn btn-outline btn-small" data-logout>Sign out</button></div></header>
+<main class="pending-wrap">
+  <section class="card pending-card membership-renewal-card">
+    <div class="pending-icon">⏳</div>
+    <div class="eyebrow" id="pending-eyebrow">Membership validity</div>
+    <h2 id="pending-title">Your trial or plan is not active.</h2>
+    <p id="pending-copy">Choose a plan, complete payment, and ask the administrator to activate your validity.</p>
+    <div id="pending-details" class="pending-details"></div>
+    <div class="renewal-price-grid" aria-label="Available membership plans">
+      <article><strong>₹99</strong><span>2 months</span></article>
+      <article class="popular"><small>POPULAR</small><strong>₹249</strong><span>6 months</span></article>
+      <article><strong>₹349</strong><span>1 year</span></article>
+    </div>
+    <div class="renewal-note"><strong>After payment:</strong> contact the administrator with your username. This page will open your dashboard automatically as soon as validity is activated.</div>
+    <div id="status-alert" class="alert"></div>
+    <div class="live-update-note" aria-live="polite"><span class="live-update-pulse"></span><span>Automatic validity updates are on</span></div>
+    <button id="check-status" class="btn btn-primary">Refresh validity status</button>
+    <a class="btn btn-outline" href="tel:+918808394539">Contact +91 88083 94539</a>
+  </section>
+</main>
+<script src="/js/common.js"></script>
+<script src="/js/pending.js?v=bolo-v19-auth"></script>
+</body>
+</html>
