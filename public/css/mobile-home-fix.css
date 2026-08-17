@@ -1,0 +1,7 @@
+/* Mobile homepage cleanup: avoid duplicate auth CTAs in the header.
+   Desktop/tablet keep the existing header actions; phones use the hero CTAs only. */
+@media (max-width: 640px) {
+  .site-header .nav-actions {
+    display: none !important;
+  }
+}
