@@ -6,6 +6,7 @@
   <title>Admin | Bolo English</title>
   <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
   <link rel="stylesheet" href="/css/styles.css?v=bolo-v20-admin">
+  <link rel="stylesheet" href="/css/admin-tools.css?v=1">
 </head>
 <body class="app-shell">
   <header class="app-header">
@@ -19,7 +20,10 @@
     <div class="container admin-layout">
       <div class="page-head">
         <div><div class="eyebrow">Administrator</div><h2>Members, trials, validity, rooms, and moderation.</h2><p>New members receive instant access with a 1-day trial. Review their details, activate paid validity after payment, and moderate rooms and live sessions.</p></div>
-        <button id="refresh-all" class="btn btn-outline btn-small">Refresh all</button>
+        <div class="admin-head-actions">
+          <button id="download-users-excel" class="btn btn-primary btn-small" type="button">Download users Excel</button>
+          <button id="refresh-all" class="btn btn-outline btn-small">Refresh all</button>
+        </div>
       </div>
       <div id="admin-alert" class="alert" role="alert"></div>
 
@@ -32,6 +36,17 @@
         <article class="card stat-card"><span class="helper">Private links</span><strong id="stat-private">0</strong></article>
       </section>
 
+      <section class="card admin-card admin-activity-card">
+        <div class="page-head compact-head">
+          <div>
+            <div class="eyebrow">Live activity</div>
+            <div class="admin-activity-title-row"><h3>Who joined</h3><span id="admin-join-activity-count" class="admin-activity-count">0</span></div>
+            <p>New Bolo English member registrations and private-link guest joins appear here automatically.</p>
+          </div>
+          <button id="clear-admin-join-activity" class="btn btn-outline btn-small" type="button">Clear activity</button>
+        </div>
+        <div id="admin-join-activity" class="admin-list"></div>
+      </section>
 
       <section class="card admin-card private-session-admin-card">
         <div class="page-head compact-head">
@@ -95,5 +110,6 @@
   </datalist>
   <script src="/js/common.js"></script>
   <script src="/js/admin.js?v=bolo-v20-admin"></script>
+  <script src="/js/admin-tools.js?v=1"></script>
 </body>
 </html>
