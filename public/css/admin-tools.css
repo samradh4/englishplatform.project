@@ -1,0 +1,83 @@
+.admin-head-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.admin-activity-card .compact-head {
+  align-items: center;
+}
+
+.admin-activity-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-activity-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(69, 181, 104, .13);
+  border: 1px solid rgba(69, 181, 104, .25);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+#admin-join-activity {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-activity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.admin-activity-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(34, 132, 79, .12);
+  font-size: 18px;
+}
+
+.admin-activity-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.admin-activity-copy strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-activity-copy small {
+  opacity: .68;
+}
+
+@media (max-width: 680px) {
+  .admin-head-actions {
+    width: 100%;
+  }
+
+  .admin-head-actions .btn {
+    flex: 1 1 150px;
+  }
+
+  .admin-activity-card .compact-head {
+    align-items: flex-start;
+  }
+}
