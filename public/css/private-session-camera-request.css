@@ -1,0 +1,24 @@
+/* Private-session camera request UI. */
+.private-request-camera-button.active {
+  border-color: rgba(91, 180, 255, .82);
+  background: rgba(91, 180, 255, .16);
+}
+
+.private-camera-request-tray {
+  border-color: rgba(91, 180, 255, .28);
+}
+
+.private-camera-request-tray .private-request-kicker {
+  color: #91ceff;
+}
+
+.private-camera-request-tray .private-request-count {
+  background: #91ceff;
+  color: #082033;
+}
+
+@media (max-width: 760px) {
+  #private-request-camera-button strong {
+    font-size: 8.5px !important;
+  }
+}
