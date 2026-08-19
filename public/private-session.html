@@ -7,6 +7,7 @@
   <title>Private Guest Session | Bolo English</title>
   <link rel="icon" type="image/png" href="/assets/bolo-icon.png">
   <link rel="stylesheet" href="/css/styles.css?v=bolo-v19-auth">
+  <link rel="stylesheet" href="/css/private-session-enhancements.css?v=1">
 </head>
 <body class="private-guest-body">
   <header class="private-guest-header">
@@ -22,7 +23,7 @@
       <div class="private-entry-icon">🎥</div>
       <div class="eyebrow">Invitation only</div>
       <h1 id="private-session-title">Loading private session…</h1>
-      <p class="private-entry-copy">This session is hidden from the public website. Guests join with audio after entering their name and phone number. Only the signed-in administrator can use a camera.</p>
+      <p class="private-entry-copy">This session is hidden from the public website. Everyone joins muted. Guests raise a hand when they want to speak, and the administrator allows the microphone. Only the signed-in administrator can use a camera.</p>
       <div id="private-entry-alert" class="alert" role="alert"></div>
       <form id="private-entry-form" class="private-entry-form">
         <div id="private-admin-join-note" class="private-security-note" hidden><strong>Administrator access:</strong> You are signed in as the administrator. You may use microphone and camera; guests remain audio-only.</div>
@@ -60,7 +61,7 @@
       <div id="private-call-alert" class="alert" role="alert"></div>
       <div id="private-video-grid" class="private-video-grid" aria-live="polite"></div>
       <div class="private-call-controls" role="toolbar" aria-label="Private call controls">
-        <button id="private-mic-button" class="private-control-button" type="button"><span>🎙️</span><strong>Mute</strong></button>
+        <button id="private-mic-button" class="private-control-button" type="button"><span>🔇</span><strong>Muted</strong></button>
         <button id="private-camera-button" class="private-control-button" type="button" hidden disabled><span>📷</span><strong>Camera off</strong></button>
         <button id="private-speaker-button" class="private-control-button" type="button"><span>🔊</span><strong>Speaker on</strong></button>
         <button id="private-leave-button" class="private-control-button private-control-danger" type="button"><span>☎</span><strong>Leave</strong></button>
@@ -71,5 +72,6 @@
   <script src="/js/common.js"></script>
   <script src="/js/private-session.js?v=safety-camera-v17"></script>
   <script src="/js/private-session-recovery.js?v=1"></script>
+  <script src="/js/private-session-enhancements.js?v=1"></script>
 </body>
 </html>
