@@ -1,0 +1,352 @@
+/* Private-room mic requests + chat. */
+.private-request-mic-button.active {
+  border-color: rgba(245, 197, 66, .8);
+  background: rgba(245, 197, 66, .16);
+}
+
+.private-mic-request-tray {
+  margin: 10px 0 12px;
+  padding: 12px;
+  border: 1px solid rgba(184, 243, 74, .24);
+  border-radius: 16px;
+  background: rgba(8, 42, 27, .92);
+}
+
+.private-mic-request-tray[hidden] {
+  display: none !important;
+}
+
+.private-request-tray-head,
+.private-request-row,
+.private-request-actions,
+.private-topbar-actions,
+.private-chat-head,
+.private-chat-message-meta {
+  display: flex;
+  align-items: center;
+}
+
+.private-request-tray-head {
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.private-request-tray-head > div,
+.private-chat-head > div {
+  display: grid;
+  gap: 2px;
+}
+
+.private-request-kicker {
+  color: #8ee9af;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.private-request-count {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 9px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #b8f34a;
+  color: #102015;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.private-request-list {
+  display: grid;
+  gap: 8px;
+}
+
+.private-request-row {
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 11px;
+  border-radius: 13px;
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.private-request-identity {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.private-request-identity strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.private-request-identity small {
+  color: rgba(255,255,255,.58);
+  font-size: 11px;
+}
+
+.private-request-actions {
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.private-request-actions button {
+  appearance: none;
+  border: 1px solid #b8f34a;
+  border-radius: 999px;
+  background: #b8f34a;
+  color: #102015;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 8px 11px;
+  cursor: pointer;
+}
+
+.private-request-actions button.reject {
+  border-color: rgba(255,255,255,.14);
+  background: transparent;
+  color: #fff;
+}
+
+.private-request-actions button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+.private-topbar-actions {
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.private-chat-toggle {
+  position: relative;
+}
+
+.private-chat-unread {
+  min-width: 18px;
+  height: 18px;
+  margin-left: 4px;
+  padding: 0 5px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #d94151;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.private-chat-unread[hidden] {
+  display: none !important;
+}
+
+.private-chat-panel {
+  position: fixed;
+  z-index: 70;
+  top: 82px;
+  right: 18px;
+  bottom: 18px;
+  width: min(390px, calc(100vw - 36px));
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 22px;
+  background: rgba(4, 29, 19, .985);
+  box-shadow: 0 22px 70px rgba(0,0,0,.42);
+  backdrop-filter: blur(22px);
+}
+
+.private-chat-panel[hidden] {
+  display: none !important;
+}
+
+.private-chat-head {
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 15px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.private-chat-head strong {
+  color: #fff;
+  font-size: 18px;
+}
+
+.private-chat-head button {
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.private-chat-messages {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.private-chat-empty {
+  margin: auto;
+  color: rgba(255,255,255,.52);
+  font-size: 12px;
+  text-align: center;
+}
+
+.private-chat-message {
+  width: fit-content;
+  max-width: 86%;
+  padding: 9px 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px 14px 14px 4px;
+  background: rgba(255,255,255,.06);
+  color: #fff;
+}
+
+.private-chat-message.own {
+  align-self: flex-end;
+  border-radius: 14px 14px 4px 14px;
+  background: rgba(52, 168, 92, .26);
+  border-color: rgba(82, 204, 119, .24);
+}
+
+.private-chat-message-meta {
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 3px;
+}
+
+.private-chat-message-meta strong {
+  font-size: 10px;
+  color: #9ce6b5;
+}
+
+.private-chat-message-meta span {
+  color: rgba(255,255,255,.42);
+  font-size: 9px;
+}
+
+.private-chat-message p {
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.private-chat-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 7px;
+  padding: 11px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.12);
+}
+
+.private-chat-form .input {
+  min-width: 0;
+  height: 42px;
+}
+
+.private-chat-form .btn {
+  height: 42px;
+}
+
+@media (max-width: 760px) {
+  .private-call-topbar {
+    align-items: flex-start;
+  }
+
+  .private-topbar-actions {
+    gap: 5px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .private-topbar-actions .btn {
+    width: 100%;
+  }
+
+  .private-mic-request-tray {
+    padding: 9px;
+    border-radius: 13px;
+  }
+
+  .private-request-row {
+    align-items: flex-start;
+    padding: 9px;
+    gap: 8px;
+  }
+
+  .private-request-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .private-request-row {
+    display: grid;
+  }
+
+  .private-request-actions button {
+    width: 100%;
+    font-size: 10px;
+    padding: 7px 8px;
+  }
+
+  .private-chat-panel {
+    top: auto;
+    left: 8px;
+    right: 8px;
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    width: auto;
+    height: min(62vh, 520px);
+    border-radius: 19px;
+  }
+
+  .private-chat-open .private-call-controls {
+    opacity: .96;
+  }
+
+  .private-call-controls {
+    grid-auto-flow: row !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-auto-columns: initial !important;
+  }
+
+  .private-control-button strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 390px) {
+  .private-chat-panel {
+    left: 6px;
+    right: 6px;
+    height: min(64vh, 500px);
+  }
+
+  .private-chat-form {
+    grid-template-columns: 1fr;
+  }
+
+  .private-chat-form .btn {
+    width: 100%;
+  }
+}
