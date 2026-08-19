@@ -50,14 +50,16 @@
   const controlsBar = document.querySelector('.private-call-controls');
   if (!controlsBar) return;
 
-  const requestCameraButton = document.createElement('button');
-  requestCameraButton.id = 'private-request-camera-button';
-  requestCameraButton.className = 'private-control-button private-request-camera-button';
-  requestCameraButton.type = 'button';
-  requestCameraButton.innerHTML = '<span>📷</span><strong>Request camera</strong>';
-
-  const handButton = document.getElementById('private-hand-button');
-  controlsBar.insertBefore(requestCameraButton, handButton || speakerButton);
+  let requestCameraButton = document.getElementById('private-request-camera-button');
+  if (!requestCameraButton) {
+    requestCameraButton = document.createElement('button');
+    requestCameraButton.id = 'private-request-camera-button';
+    requestCameraButton.className = 'private-control-button private-request-camera-button';
+    requestCameraButton.type = 'button';
+    requestCameraButton.innerHTML = '<span>📷</span><strong>Request camera</strong>';
+    const handButton = document.getElementById('private-hand-button');
+    controlsBar.insertBefore(requestCameraButton, handButton || speakerButton);
+  }
 
   const cameraRequestTray = document.createElement('section');
   cameraRequestTray.id = 'private-camera-request-tray';
