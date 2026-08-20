@@ -1,4 +1,4 @@
-/* Mobile dashboard priority: put room action first and keep support unobtrusive. */
+/* Mobile dashboard priority: greet the member first, then show the room CTA immediately. */
 @media (max-width: 760px) {
   .dashboard-welcome-grid {
     display: flex !important;
@@ -6,13 +6,27 @@
     gap: 16px !important;
   }
 
+  /* Remove only the wrapper box from layout so its children can be ordered
+     around the Join card without duplicating dashboard markup. */
+  .dashboard-welcome-copy {
+    display: contents !important;
+  }
+
+  /* First thing under the header: Welcome back + member name. */
+  .dashboard-welcome-line {
+    order: -3 !important;
+    margin: 4px 0 0 !important;
+    padding: 0 4px !important;
+  }
+
+  /* Second: the important room action. */
   .join-next-card {
-    order: -1 !important;
+    order: -2 !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 14px !important;
     padding: 20px !important;
-    margin-top: 8px !important;
+    margin-top: 0 !important;
   }
 
   .join-next-card h2 {
@@ -41,8 +55,18 @@
     margin-top: 2px !important;
   }
 
-  .dashboard-welcome-copy {
-    order: 1;
+  /* Longer welcome copy and benefits continue below the room action. */
+  #dashboard-main-heading {
+    order: -1 !important;
+    margin-top: 8px !important;
+  }
+
+  .dashboard-welcome-copy > p {
+    order: 0 !important;
+  }
+
+  .dashboard-benefits {
+    order: 1 !important;
   }
 
   /* Keep the WhatsApp support shortcut from covering the main room CTA. */
