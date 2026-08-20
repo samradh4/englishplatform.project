@@ -15,4 +15,13 @@
     }
     return stream;
   };
+
+  // Load the room background/foreground recovery layer after the main room
+  // code and the default-mute guard are installed.
+  if (!document.querySelector('script[data-bolo-room-background-recovery]')) {
+    const script = document.createElement('script');
+    script.src = '/js/room-background-recovery.js?v=1';
+    script.dataset.boloRoomBackgroundRecovery = '1';
+    document.body.appendChild(script);
+  }
 })();
