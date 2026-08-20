@@ -12,6 +12,9 @@
   let wakeLock = null;
   let busy = false;
   let lastResumeAt = 0;
+  let anchorContext = null;
+  let anchorOscillator = null;
+  let anchorGain = null;
 
   function active() {
     return Boolean(accessToken && callShell && callShell.hidden === false && !leaving);
@@ -31,6 +34,31 @@
       navigator.mediaSession.setActionHandler?.('play', () => resumeContinuity('media-play').catch(() => {}));
       navigator.mediaSession.setActionHandler?.('pause', () => {});
     } catch {}
+  }
+
+  async function ensureBackgroundAudioAnchor() {
+    if (!active()) return;
+    const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextCtor) return;
+    try {
+      if (!anchorContext) {
+        anchorContext = new AudioContextCtor();
+        anchorOscillator = anchorContext.createOscillator();
+        anchorGain = anchorContext.createGain();
+        // Inaudible sub-audible anchor. It helps some mobile browsers keep the
+        // page classified as an active audio session without producing sound.
+        anchorOscillator.frequency.value = 18;
+        anchorGain.gain.value = 0.000001;
+        anchorOscillator.connect(anchorGain);
+        anchorGain.connect(anchorContext.destination);
+        anchorOscillator.start();
+      }
+      if (anchorContext.state === 'suspended' && document.visibilityState === 'visible') {
+        await anchorContext.resume();
+      }
+    } catch (error) {
+      console.warn('Background audio anchor unavailable:', error);
+    }
   }
 
   async function requestWakeLock() {
@@ -122,6 +150,7 @@
     busy = true;
     try {
       armMediaSession();
+      await ensureBackgroundAudioAnchor();
       ensureSignaling();
       await ensureMicrophone().catch((error) => console.warn('Private mic resume failed:', error));
       await resumeRemoteMedia();
@@ -132,6 +161,7 @@
       window.setTimeout(() => {
         if (!active() || document.visibilityState === 'hidden') return;
         ensureSignaling();
+        ensureBackgroundAudioAnchor().catch(() => {});
         resumeRemoteMedia().catch(() => {});
       }, reason === 'pageshow' ? 500 : 1000);
     } finally {
@@ -142,6 +172,7 @@
   function prepareBackground() {
     if (!active()) return;
     armMediaSession();
+    ensureBackgroundAudioAnchor().catch(() => {});
     const track = localStream?.getAudioTracks?.()[0];
     if (track) watchMic(track);
     resumeRemoteMedia().catch(() => {});
@@ -160,7 +191,9 @@
   window.addEventListener('online', () => window.setTimeout(() => resumeContinuity('online').catch(() => {}), 80));
 
   document.addEventListener('pointerdown', () => {
-    if (active()) resumeRemoteMedia().catch(() => {});
+    if (!active()) return;
+    ensureBackgroundAudioAnchor().catch(() => {});
+    resumeRemoteMedia().catch(() => {});
   }, { passive: true });
 
   window.setInterval(() => {
@@ -172,5 +205,13 @@
   window.addEventListener('pagehide', () => {
     try { wakeLock?.release?.(); } catch {}
     wakeLock = null;
+  });
+
+  window.addEventListener('beforeunload', () => {
+    try { anchorOscillator?.stop?.(); } catch {}
+    try { anchorContext?.close?.(); } catch {}
+    anchorContext = null;
+    anchorOscillator = null;
+    anchorGain = null;
   });
 })();
