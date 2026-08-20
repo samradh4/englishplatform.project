@@ -6,6 +6,8 @@
 // - serializes normal offers per peer
 // - mirrors camera requests through the server/SSE path
 // - shows a visible "joined the room" toast
+// - keeps WhatsApp clear of the mobile chat composer
+// - blocks digits and links from private chat before they are sent
 (() => {
   if (typeof handleSignal !== 'function' || typeof connectEvents !== 'function') return;
 
@@ -24,6 +26,36 @@
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
+  function isBlockedChatText(value) {
+    const text = String(value || '').trim();
+    if (/\d/.test(text)) return 'Numbers are not allowed in room chat.';
+    if (/(?:https?:\/\/|www\.|mailto:|(?:[a-z0-9-]+\.)+(?:com|org|net|in|io|co|me|app|xyz|ly|ai|dev|edu|gov)\b)/i.test(text)) {
+      return 'Links are not allowed in room chat.';
+    }
+    return '';
+  }
+
+  // Keep the floating support shortcut away from the message composer.
+  const chatSafetyStyle = document.createElement('style');
+  chatSafetyStyle.id = 'private-chat-safety-style';
+  chatSafetyStyle.textContent = `
+    body.private-chat-open .bolo-whatsapp-support{display:none!important}
+  `;
+  document.head.appendChild(chatSafetyStyle);
+
+  // The collaboration script creates the chat form before this script loads.
+  // Capture phase prevents its normal submit handler from running for blocked text.
+  const privateChatForm = document.getElementById('private-chat-form');
+  const privateChatInput = document.getElementById('private-chat-input');
+  privateChatForm?.addEventListener('submit', (event) => {
+    const error = isBlockedChatText(privateChatInput?.value);
+    if (!error) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    showAlert(callAlert, error);
+    privateChatInput?.focus();
+  }, true);
 
   function ensureToastLayer() {
     let layer = document.getElementById('private-room-toasts');
