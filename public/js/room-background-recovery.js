@@ -13,6 +13,9 @@
   let wakeLock = null;
   let watchedMicTrack = null;
   let recoveryTimer = null;
+  let anchorContext = null;
+  let anchorOscillator = null;
+  let anchorGain = null;
 
   function callActive() {
     return Boolean(hasJoined && !isLeaving);
@@ -32,6 +35,27 @@
       navigator.mediaSession.setActionHandler?.('play', () => resumeRoomCall('media-play').catch(() => {}));
       navigator.mediaSession.setActionHandler?.('pause', () => {});
     } catch {}
+  }
+
+  async function ensureBackgroundAudioAnchor() {
+    if (!callActive()) return;
+    const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextCtor) return;
+    try {
+      if (!anchorContext) {
+        anchorContext = new AudioContextCtor();
+        anchorOscillator = anchorContext.createOscillator();
+        anchorGain = anchorContext.createGain();
+        anchorOscillator.frequency.value = 18;
+        anchorGain.gain.value = 0.000001;
+        anchorOscillator.connect(anchorGain);
+        anchorGain.connect(anchorContext.destination);
+        anchorOscillator.start();
+      }
+      if (anchorContext.state === 'suspended' && document.visibilityState === 'visible') await anchorContext.resume();
+    } catch (error) {
+      console.warn('Room background audio anchor unavailable:', error);
+    }
   }
 
   async function requestWakeLock() {
@@ -63,15 +87,11 @@
     track.contentHint = 'speech';
     track.addEventListener('mute', () => {
       if (!callActive()) return;
-      if (document.visibilityState === 'visible') {
-        window.setTimeout(() => resumeRoomCall('mic-muted').catch(() => {}), 250);
-      }
+      if (document.visibilityState === 'visible') window.setTimeout(() => resumeRoomCall('mic-muted').catch(() => {}), 250);
     });
     track.addEventListener('ended', () => {
       if (!callActive()) return;
-      if (document.visibilityState === 'visible') {
-        window.setTimeout(() => resumeRoomCall('mic-ended').catch(() => {}), 100);
-      }
+      if (document.visibilityState === 'visible') window.setTimeout(() => resumeRoomCall('mic-ended').catch(() => {}), 100);
     });
   }
 
@@ -153,6 +173,7 @@
 
     try {
       armMediaSession();
+      await ensureBackgroundAudioAnchor();
       ensureEventAndRelayTransport();
       await ensureMicrophoneTrack().catch((error) => console.warn('Could not restore room microphone:', error));
       await resumePlayback();
@@ -166,6 +187,7 @@
       window.setTimeout(async () => {
         if (!callActive() || document.visibilityState === 'hidden') return;
         ensureEventAndRelayTransport();
+        await ensureBackgroundAudioAnchor();
         await resumePlayback();
         if (voiceMode !== 'relay') {
           const unhealthy = [...peers.entries()].filter(([, pc]) => !transportHealthy(pc));
@@ -183,6 +205,7 @@
   function prepareForBackground() {
     if (!callActive()) return;
     armMediaSession();
+    ensureBackgroundAudioAnchor().catch(() => {});
     resumePlayback().catch(() => {});
     const track = localStream?.getAudioTracks?.()[0];
     if (track) watchMicTrack(track);
@@ -191,25 +214,19 @@
 
   document.addEventListener('visibilitychange', () => {
     if (!callActive()) return;
-    if (document.visibilityState === 'hidden') {
-      prepareForBackground();
-    } else {
-      window.setTimeout(() => resumeRoomCall('visibility').catch(() => {}), 80);
-    }
+    if (document.visibilityState === 'hidden') prepareForBackground();
+    else window.setTimeout(() => resumeRoomCall('visibility').catch(() => {}), 80);
   });
 
   window.addEventListener('focus', () => window.setTimeout(() => resumeRoomCall('focus').catch(() => {}), 80));
   window.addEventListener('pageshow', () => window.setTimeout(() => resumeRoomCall('pageshow').catch(() => {}), 80));
   window.addEventListener('online', () => window.setTimeout(() => resumeRoomCall('online').catch(() => {}), 100));
   document.addEventListener('resume', () => window.setTimeout(() => resumeRoomCall('resume').catch(() => {}), 80));
-
-  // Chromium's Page Lifecycle API may freeze a background tab. We cannot keep
-  // executing while frozen, but the resume event lets us repair media without
-  // making the member rejoin the room.
   document.addEventListener('freeze', prepareForBackground);
 
   document.addEventListener('pointerdown', () => {
     if (!callActive()) return;
+    ensureBackgroundAudioAnchor().catch(() => {});
     resumePlayback().catch(() => {});
   }, { passive: true });
 
@@ -222,6 +239,14 @@
   window.addEventListener('pagehide', () => {
     try { wakeLock?.release?.(); } catch {}
     wakeLock = null;
+  });
+
+  window.addEventListener('beforeunload', () => {
+    try { anchorOscillator?.stop?.(); } catch {}
+    try { anchorContext?.close?.(); } catch {}
+    anchorContext = null;
+    anchorOscillator = null;
+    anchorGain = null;
   });
 
   armMediaSession();
