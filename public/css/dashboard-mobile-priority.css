@@ -1,0 +1,70 @@
+/* Mobile dashboard priority: put room action first and keep support unobtrusive. */
+@media (max-width: 760px) {
+  .dashboard-welcome-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .join-next-card {
+    order: -1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding: 20px !important;
+    margin-top: 8px !important;
+  }
+
+  .join-next-card h2 {
+    order: 0;
+    margin: 0 !important;
+    font-size: clamp(1.55rem, 7vw, 2rem) !important;
+    line-height: 1.05 !important;
+  }
+
+  .join-next-button {
+    order: 1;
+    width: 100% !important;
+    min-height: 58px !important;
+    margin: 0 !important;
+    position: relative;
+    z-index: 2;
+  }
+
+  .join-next-note {
+    order: 2;
+    margin: 0 !important;
+  }
+
+  .join-next-stats {
+    order: 3;
+    margin-top: 2px !important;
+  }
+
+  .dashboard-welcome-copy {
+    order: 1;
+  }
+
+  /* Keep the WhatsApp support shortcut from covering the main room CTA. */
+  .bolo-dashboard-shell .bolo-whatsapp-support {
+    width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    right: 12px !important;
+    bottom: 14px !important;
+  }
+
+  .bolo-dashboard-shell .bolo-whatsapp-support > span:last-child {
+    display: none !important;
+  }
+
+  .bolo-dashboard-shell .bolo-whatsapp-support .bolo-wa-icon {
+    width: 32px !important;
+    height: 32px !important;
+    flex-basis: 32px !important;
+  }
+}
