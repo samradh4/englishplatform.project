@@ -106,3 +106,67 @@ function createLiveUpdateStream(handlers = {}) {
   });
   return source;
 }
+
+/**
+ * Global Bolo English WhatsApp support shortcut.
+ * Kept in common.js so the same support option is available on public,
+ * member, normal-room and private-session pages.
+ */
+function installWhatsAppSupport() {
+  if (!document.body || document.getElementById('bolo-whatsapp-support')) return;
+
+  const style = document.createElement('style');
+  style.id = 'bolo-whatsapp-support-style';
+  style.textContent = `
+    .bolo-whatsapp-support {
+      position: fixed;
+      right: max(16px, env(safe-area-inset-right));
+      bottom: max(18px, env(safe-area-inset-bottom));
+      z-index: 9998;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: #25D366;
+      color: #062d19;
+      text-decoration: none;
+      font: inherit;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .22);
+      border: 1px solid rgba(255, 255, 255, .45);
+    }
+    .bolo-whatsapp-support:hover { transform: translateY(-1px); }
+    .bolo-whatsapp-support .bolo-wa-icon { font-size: 20px; line-height: 1; }
+    .room-body .bolo-whatsapp-support,
+    .private-guest-body .bolo-whatsapp-support {
+      bottom: calc(max(18px, env(safe-area-inset-bottom)) + 82px);
+    }
+    @media (max-width: 640px) {
+      .bolo-whatsapp-support {
+        right: max(10px, env(safe-area-inset-right));
+        min-height: 44px;
+        padding: 0 12px;
+        font-size: 13px;
+      }
+      .room-body .bolo-whatsapp-support,
+      .private-guest-body .bolo-whatsapp-support {
+        bottom: calc(max(12px, env(safe-area-inset-bottom)) + 76px);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  const link = document.createElement('a');
+  link.id = 'bolo-whatsapp-support';
+  link.className = 'bolo-whatsapp-support';
+  link.href = 'https://wa.me/918808394539?text=Hi%20Bolo%20English%2C%20I%20need%20help.';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.setAttribute('aria-label', 'Chat with Bolo English on WhatsApp at +91 88083 94539');
+  link.innerHTML = '<span class="bolo-wa-icon" aria-hidden="true">💬</span><span>WhatsApp</span>';
+  document.body.appendChild(link);
+}
+
+installWhatsAppSupport();
